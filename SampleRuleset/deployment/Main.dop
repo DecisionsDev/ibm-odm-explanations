@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ibm.rules.studio.model.decisionservice:Operation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ibm.rules.studio.model.decisionservice="http://com.ibm.rules.studio/model/decisionservice.ecore" xmlns:ilog.rules.studio.model.query.extractor="http://ilog.rules.studio/model/query/extractor.ecore" rulesetName="Main" usingRuleflow="true" ruleflowName="Main" targetRuleProjectName="SampleRuleset">
+  <name>Main</name>
+  <uuid>188425da-f2cd-48af-b99f-6421786cce01</uuid>
+  <referencedVariables variableName="output" variableSetName="vars" direction="OUT">
+    <variableSet href="../rules/vars.var#6334bba0-eead-4adf-9d9f-f0fffbd3cb1b"/>
+  </referencedVariables>
+  <referencedVariables variableName="customer" variableSetName="vars">
+    <variableSet href="../rules/vars.var#6334bba0-eead-4adf-9d9f-f0fffbd3cb1b"/>
+  </referencedVariables>
+  <ruleflow href="../rules/Main.rfl#02a7d29e-857d-4d51-97f1-ba5ffb9737cd"/>
+  <extractor xsi:type="ilog.rules.studio.model.query.extractor:QueryExtractor" name="Main_extractor" validator="Default Validator"/>
+  <targetRuleProject href="../../SampleRuleset#821c7ad0-de27-40e2-a2be-0c55ab78a8b2"/>
+</com.ibm.rules.studio.model.decisionservice:Operation>

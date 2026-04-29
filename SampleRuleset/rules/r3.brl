@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.brl:ActionRule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.brl="http://ilog.rules.studio/model/brl.ecore">
+  <name>r3</name>
+  <uuid>278fceb9-4400-4813-ae22-0e3498488467</uuid>
+  <locale>en_US</locale>
+  <definition><![CDATA[definitions 
+	set 'the current customer' to a customer in the customers of 'the store' ; 
+	set 'the address' to a string in the addresses of 'the current customer'  ; 
+if
+	'the address' contains "France" 
+	and the full name of 'the current customer' contains "Doe"
+then
+	print the last name of 'the customer' +  " has an address in France: " + 'the address' ;
+	print collect useful values ; 
+	print collect conditions ;
+	]]></definition>
+</ilog.rules.studio.model.brl:ActionRule>

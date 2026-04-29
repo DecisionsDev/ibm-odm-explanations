@@ -1,0 +1,42 @@
+# Vocabulary Properties
+GlobalSemanticAction = usefulValues.semanticAction
+uuid = 1d767bf8-7d6a-49bf-8b72-4561bd363422
+
+# com.ibm.rules.explanation.Explain
+com.ibm.rules.explanation.Explain#concept.label = explain
+com.ibm.rules.explanation.Explain.collectConditions()#phrase.navigation = collect conditions
+com.ibm.rules.explanation.Explain.collectUsefulValues()#phrase.navigation = collect useful values
+com.ibm.rules.explanation.Explain.formatMessage(java.lang.String,java.lang.Object[])#phrase.navigation = explain.formatMessage({0}, {1})
+com.ibm.rules.explanation.Explain.formatObject(java.lang.Object)#phrase.navigation = explain.formatObject({0})
+com.ibm.rules.explanation.Explain.formatObjects(java.lang.Object[])#phrase.navigation = explain.formatObjects({0})
+com.ibm.rules.explanation.Explain.formatValue(java.lang.Object)#phrase.navigation = explain.formatValue({0})
+com.ibm.rules.explanation.Explain.formatValues(java.lang.Object[])#phrase.navigation = explain.formatValues({0})
+
+# com.ibm.rules.samples.Customer
+com.ibm.rules.samples.Customer#concept.label = customer
+com.ibm.rules.samples.Customer.addToAddresses(java.lang.String)#phrase.action = add {0} to the addresses of {this}
+com.ibm.rules.samples.Customer.addresses#phrase.action = set the addresses of {this} to {addresse}
+com.ibm.rules.samples.Customer.addresses#phrase.navigation = {addresse} of {this}
+com.ibm.rules.samples.Customer.age#phrase.action = set the age of {this} to {age}
+com.ibm.rules.samples.Customer.age#phrase.navigation = {age} of {this}
+com.ibm.rules.samples.Customer.birthDate#phrase.action = set the birth date of {this} to {birth date}
+com.ibm.rules.samples.Customer.birthDate#phrase.navigation = {birth date} of {this}
+com.ibm.rules.samples.Customer.clearAddresses()#phrase.action = clear the addresses of {this}
+com.ibm.rules.samples.Customer.firstName#phrase.action = set the first name of {this} to {first name}
+com.ibm.rules.samples.Customer.firstName#phrase.navigation = {first name} of {this}
+com.ibm.rules.samples.Customer.fullName#phrase.navigation = {full name} of {this}
+com.ibm.rules.samples.Customer.lastName#phrase.action = set the last name of {this} to {last name}
+com.ibm.rules.samples.Customer.lastName#phrase.navigation = {last name} of {this}
+com.ibm.rules.samples.Customer.married#phrase.action = make it {married} that {this} is married
+com.ibm.rules.samples.Customer.married#phrase.navigation = {this} is married
+com.ibm.rules.samples.Customer.removeFromAddresses(java.lang.String)#phrase.action = remove {0} from the addresses of {this}
+
+# com.ibm.rules.samples.Store
+com.ibm.rules.samples.Store#concept.label = store
+com.ibm.rules.samples.Store.addToCustomers(com.ibm.rules.samples.Customer)#phrase.action = add {0} to the customers of {this}
+com.ibm.rules.samples.Store.clearCustomers()#phrase.action = clear the customers of {this}
+com.ibm.rules.samples.Store.customers#phrase.action = set the customers of {this} to {customer}
+com.ibm.rules.samples.Store.customers#phrase.navigation = {customer} of {this}
+com.ibm.rules.samples.Store.name#phrase.action = set the name of {this} to {name}
+com.ibm.rules.samples.Store.name#phrase.navigation = {name} of {this}
+com.ibm.rules.samples.Store.removeFromCustomers(com.ibm.rules.samples.Customer)#phrase.action = remove {0} from the customers of {this}

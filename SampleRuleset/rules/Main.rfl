@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.ruleflow:RuleFlow xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.ruleflow="http://ilog.rules.studio/model/ruleflow.ecore">
+  <name>Main</name>
+  <uuid>02a7d29e-857d-4d51-97f1-ba5ffb9737cd</uuid>
+  <locale>en_US</locale>
+  <categories>any</categories>
+  <rfModel>
+<Ruleflow xmlns="http://schemas.ilog.com/Rules/7.0/Ruleflow">
+  <Body>
+    <TaskList>
+      <StartTask Identifier="task_0">
+        <Actions Language="irl"><![CDATA[customer = new com.ibm.rules.samples.Customer();
+customer.lastName  = "Doe";
+customer.firstName = "John";
+customer.birthDate = new java.util.Date(java.util.Date.UTC(2005, 11, 22, 0, 0, 0));
+customer.age = 19;
+customer.addToAddresses("Av. Gustave Eiffel, 75007 Paris, France");
+customer.addToAddresses("20 W 34th St., New York, NY 10001, United States");
+customer.addToAddresses("London SW1A 0AA, United Kingdom");
+
+com.ibm.rules.samples.Customer janeDoe = new com.ibm.rules.samples.Customer();
+janeDoe.lastName  = "Doe";
+janeDoe.firstName = "Jane";
+janeDoe.birthDate = new java.util.Date(java.util.Date.UTC(2001, 11, 22, 0, 0, 0));
+janeDoe.age = 23;
+janeDoe.addToAddresses("A45 Bd François Grosso, 06000 Nice");
+
+store = new com.ibm.rules.samples.Store();
+store.name = "My Store";
+store.addToCustomers(customer);
+store.addToCustomers(janeDoe);]]></Actions>
+      </StartTask>
+      <RuleTask ExecutionMode="Fastpath" ExitCriteria="None" Identifier="task_1" Ordering="Default">
+        <RuleList>
+          <Rule Uuid="84fbd1a4-f125-43ca-afcb-d792b00cc67e"/>
+          <Rule Uuid="7f8a023a-cb9c-4f5a-b71d-daaa2879bb91"/>
+          <Rule Uuid="3a288839-4f28-49ec-8fc2-2e59c61dc95b"/>
+          <Rule Uuid="278fceb9-4400-4813-ae22-0e3498488467"/>
+        </RuleList>
+      </RuleTask>
+      <StopTask Identifier="task_2"/>
+    </TaskList>
+    <NodeList>
+      <TaskNode Identifier="node2" Task="task_0"/>
+      <TaskNode Identifier="node3" Task="task_1"/>
+      <TaskNode Identifier="node4" Task="task_2"/>
+    </NodeList>
+    <TransitionList>
+      <Transition Identifier="link5" Source="node2" Target="node3"/>
+      <Transition Identifier="link6" Source="node3" Target="node4"/>
+    </TransitionList>
+  </Body>
+  <Resources>
+    <ResourceSet Locale="en_US">
+      <Data Name="node3#y">279.0</Data>
+      <Data Name="node4#x">607.0</Data>
+      <Data Name="node2#y">158.0</Data>
+      <Data Name="node3#x">606.0</Data>
+      <Data Name="node2#x">611.0</Data>
+      <Data Name="node4#y">427.0</Data>
+    </ResourceSet>
+  </Resources>
+  <Properties/>
+</Ruleflow>
+</rfModel>
+</ilog.rules.studio.model.ruleflow:RuleFlow>

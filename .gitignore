@@ -1,0 +1,9 @@
+output
+bin
+.settings
+.DS_Store
+/.vscode
+/.metals
+*/resources/xom-libraries
+*/target
+.idea

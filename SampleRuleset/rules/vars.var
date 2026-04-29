@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>vars</name>
+  <uuid>6334bba0-eead-4adf-9d9f-f0fffbd3cb1b</uuid>
+  <variables name="output" type="java.lang.String" initialValue="" verbalization="the output"/>
+  <variables name="customer" type="com.ibm.rules.samples.Customer" initialValue="" verbalization="the customer"/>
+  <variables name="store" type="com.ibm.rules.samples.Store" initialValue="" verbalization="the store"/>
+</ilog.rules.studio.model.base:VariableSet>

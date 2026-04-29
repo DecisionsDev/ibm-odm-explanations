@@ -1,0 +1,53 @@
+
+#loadGetterSetterAsProperties
+property origin "xom:/SampleRuleset//SampleXom"
+property uuid "b5efb9a0-7d94-41a6-bdd0-5ad8f7cf24bb"
+package com.ibm.rules.explanation;
+
+
+class Explain
+{
+    Explain();
+    static string collectConditions();
+    static string collectUsefulValues();
+    static string formatMessage(string arg1, java.lang.Object[] arg2);
+    static string formatObject(object arg);
+    static string formatObjects(java.lang.Object[] arg);
+    static string formatValue(object arg);
+    static string formatValues(java.lang.Object[] arg);
+}
+
+package com.ibm.rules.samples;
+
+
+class Customer
+{
+    java.util.List addresses domain 0,* class string;
+    int age;
+    java.util.Date birthDate;
+    string firstName;
+    readonly string fullName;
+    string lastName;
+    boolean married;
+    Customer();
+    void addToAddresses(string arg)
+                property collectionAttribute "addresses";
+    void clearAddresses()
+                property collectionAttribute "addresses";
+    void removeFromAddresses(string arg)
+                property collectionAttribute "addresses";
+}
+
+class Store
+{
+    java.util.List customers domain 0,* class com.ibm.rules.samples.Customer;
+    string name;
+    Store();
+    void addToCustomers(com.ibm.rules.samples.Customer arg)
+                property collectionAttribute "customers";
+    void clearCustomers()
+                property collectionAttribute "customers";
+    void removeFromCustomers(com.ibm.rules.samples.Customer arg)
+                property collectionAttribute "customers";
+}
+

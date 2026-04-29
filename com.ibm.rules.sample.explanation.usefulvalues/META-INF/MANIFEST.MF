@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Explanation with useful values
+Bundle-SymbolicName: com.ibm.rules.sample.explanation.usefulvalues;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.ibm.rules.sample.explanation.usefulvalues.Activator
+Bundle-Vendor: IBM
+Require-Bundle: org.eclipse.core.runtime,
+ com.ibm.rules.dt.bundle;bundle-version="9.5.0.1",
+ ilog.rules.brl.brldf;bundle-version="9.5.0.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Automatic-Module-Name: com.ibm.rules.sample.explanation.usefulvalues
+Bundle-ActivationPolicy: lazy
