@@ -36,13 +36,15 @@ You can see an example in [UsefulValuesAction.java](com.ibm.rules.sample.explana
 
 ## How to use this contribution
 
+The contribution requires ODM 9.5.0.1 or higher.
+
 1. Import the 3 folders in Rule Designer
 2. Take a look at the Java code in the class `UsefulValuesAction.java`
 3. Take a look at the usage in the rules and decision tables of the sample project `SampleRuleset`
 
 ## How to install in ODM
 
-https://www.ibm.com/docs/en/odm/9.0.0?topic=in-deploying-plug
+https://www.ibm.com/docs/en/odm/9.5.0?topic=in-deploying-plug
 
 # License
 The Dockerfiles and associated scripts found in this project are licensed under the [Apache License 2.0](LICENSE).
