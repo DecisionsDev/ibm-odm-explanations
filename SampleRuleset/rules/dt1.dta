@@ -49,6 +49,11 @@ if
             <Text><![CDATA[print collect useful values ]]></Text>
           </ExpressionDefinition>
         </ActionDefinition>
+        <ActionDefinition Id="A3">
+          <ExpressionDefinition>
+            <Text><![CDATA[print collect conditions ]]></Text>
+          </ExpressionDefinition>
+        </ActionDefinition>
       </ActionDefinitions>
     </Structure>
     <Contents>
@@ -77,6 +82,9 @@ if
                     <Action DefId="A2">
                       <Expression/>
                     </Action>
+                    <Action DefId="A3">
+                      <Expression/>
+                    </Action>
                   </ActionSet>
                 </Condition>
               </Partition>
@@ -99,6 +107,9 @@ if
                     <Action DefId="A2">
                       <Expression/>
                     </Action>
+                    <Action DefId="A3">
+                      <Expression/>
+                    </Action>
                   </ActionSet>
                 </Condition>
               </Partition>
@@ -112,6 +123,9 @@ if
               <Expression/>
             </Action>
             <Action DefId="A2">
+              <Expression/>
+            </Action>
+            <Action DefId="A3">
               <Expression/>
             </Action>
           </ActionSet>
@@ -129,9 +143,14 @@ if
                   <Expression/>
                   <ActionSet>
                     <Action DefId="A0">
-                      <Expression/>
+                      <Expression>
+                        <Param><![CDATA["Young Adult"]]></Param>
+                      </Expression>
                     </Action>
                     <Action DefId="A2">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A3">
                       <Expression/>
                     </Action>
                   </ActionSet>
@@ -148,31 +167,13 @@ if
                   <ActionSet>
                     <Action DefId="A0">
                       <Expression>
-                        <Param><![CDATA["Young Adult 1"]]></Param>
+                        <Param><![CDATA["Young Adult Mike"]]></Param>
                       </Expression>
                     </Action>
                     <Action DefId="A2">
                       <Expression/>
                     </Action>
-                  </ActionSet>
-                </Condition>
-              </Partition>
-            </Condition>
-          </Partition>
-        </Condition>
-        <Condition>
-          <Expression/>
-          <Partition DefId="C1">
-            <Condition>
-              <Expression/>
-              <Partition DefId="C2">
-                <Condition>
-                  <Expression/>
-                  <ActionSet>
-                    <Action DefId="A0">
-                      <Expression/>
-                    </Action>
-                    <Action DefId="A2">
+                    <Action DefId="A3">
                       <Expression/>
                     </Action>
                   </ActionSet>
@@ -196,25 +197,7 @@ if
                     <Action DefId="A2">
                       <Expression/>
                     </Action>
-                  </ActionSet>
-                </Condition>
-              </Partition>
-            </Condition>
-          </Partition>
-        </Condition>
-        <Condition>
-          <Expression/>
-          <Partition DefId="C1">
-            <Condition>
-              <Expression/>
-              <Partition DefId="C2">
-                <Condition>
-                  <Expression/>
-                  <ActionSet>
-                    <Action DefId="A0">
-                      <Expression/>
-                    </Action>
-                    <Action DefId="A2">
+                    <Action DefId="A3">
                       <Expression/>
                     </Action>
                   </ActionSet>
@@ -238,25 +221,7 @@ if
                     <Action DefId="A2">
                       <Expression/>
                     </Action>
-                  </ActionSet>
-                </Condition>
-              </Partition>
-            </Condition>
-          </Partition>
-        </Condition>
-        <Condition>
-          <Expression/>
-          <Partition DefId="C1">
-            <Condition>
-              <Expression/>
-              <Partition DefId="C2">
-                <Condition>
-                  <Expression/>
-                  <ActionSet>
-                    <Action DefId="A0">
-                      <Expression/>
-                    </Action>
-                    <Action DefId="A2">
+                    <Action DefId="A3">
                       <Expression/>
                     </Action>
                   </ActionSet>
@@ -280,25 +245,7 @@ if
                     <Action DefId="A2">
                       <Expression/>
                     </Action>
-                  </ActionSet>
-                </Condition>
-              </Partition>
-            </Condition>
-          </Partition>
-        </Condition>
-        <Condition>
-          <Expression/>
-          <Partition DefId="C1">
-            <Condition>
-              <Expression/>
-              <Partition DefId="C2">
-                <Condition>
-                  <Expression/>
-                  <ActionSet>
-                    <Action DefId="A0">
-                      <Expression/>
-                    </Action>
-                    <Action DefId="A2">
+                    <Action DefId="A3">
                       <Expression/>
                     </Action>
                   </ActionSet>
@@ -322,25 +269,7 @@ if
                     <Action DefId="A2">
                       <Expression/>
                     </Action>
-                  </ActionSet>
-                </Condition>
-              </Partition>
-            </Condition>
-          </Partition>
-        </Condition>
-        <Condition>
-          <Expression/>
-          <Partition DefId="C1">
-            <Condition>
-              <Expression/>
-              <Partition DefId="C2">
-                <Condition>
-                  <Expression/>
-                  <ActionSet>
-                    <Action DefId="A0">
-                      <Expression/>
-                    </Action>
-                    <Action DefId="A2">
+                    <Action DefId="A3">
                       <Expression/>
                     </Action>
                   </ActionSet>
@@ -364,25 +293,7 @@ if
                     <Action DefId="A2">
                       <Expression/>
                     </Action>
-                  </ActionSet>
-                </Condition>
-              </Partition>
-            </Condition>
-          </Partition>
-        </Condition>
-        <Condition>
-          <Expression/>
-          <Partition DefId="C1">
-            <Condition>
-              <Expression/>
-              <Partition DefId="C2">
-                <Condition>
-                  <Expression/>
-                  <ActionSet>
-                    <Action DefId="A0">
-                      <Expression/>
-                    </Action>
-                    <Action DefId="A2">
+                    <Action DefId="A3">
                       <Expression/>
                     </Action>
                   </ActionSet>
@@ -406,25 +317,7 @@ if
                     <Action DefId="A2">
                       <Expression/>
                     </Action>
-                  </ActionSet>
-                </Condition>
-              </Partition>
-            </Condition>
-          </Partition>
-        </Condition>
-        <Condition>
-          <Expression/>
-          <Partition DefId="C1">
-            <Condition>
-              <Expression/>
-              <Partition DefId="C2">
-                <Condition>
-                  <Expression/>
-                  <ActionSet>
-                    <Action DefId="A0">
-                      <Expression/>
-                    </Action>
-                    <Action DefId="A2">
+                    <Action DefId="A3">
                       <Expression/>
                     </Action>
                   </ActionSet>
@@ -448,25 +341,7 @@ if
                     <Action DefId="A2">
                       <Expression/>
                     </Action>
-                  </ActionSet>
-                </Condition>
-              </Partition>
-            </Condition>
-          </Partition>
-        </Condition>
-        <Condition>
-          <Expression/>
-          <Partition DefId="C1">
-            <Condition>
-              <Expression/>
-              <Partition DefId="C2">
-                <Condition>
-                  <Expression/>
-                  <ActionSet>
-                    <Action DefId="A0">
-                      <Expression/>
-                    </Action>
-                    <Action DefId="A2">
+                    <Action DefId="A3">
                       <Expression/>
                     </Action>
                   </ActionSet>
@@ -490,25 +365,7 @@ if
                     <Action DefId="A2">
                       <Expression/>
                     </Action>
-                  </ActionSet>
-                </Condition>
-              </Partition>
-            </Condition>
-          </Partition>
-        </Condition>
-        <Condition>
-          <Expression/>
-          <Partition DefId="C1">
-            <Condition>
-              <Expression/>
-              <Partition DefId="C2">
-                <Condition>
-                  <Expression/>
-                  <ActionSet>
-                    <Action DefId="A0">
-                      <Expression/>
-                    </Action>
-                    <Action DefId="A2">
+                    <Action DefId="A3">
                       <Expression/>
                     </Action>
                   </ActionSet>
@@ -530,6 +387,225 @@ if
                       <Expression/>
                     </Action>
                     <Action DefId="A2">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A3">
+                      <Expression/>
+                    </Action>
+                  </ActionSet>
+                </Condition>
+              </Partition>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C1">
+            <Condition>
+              <Expression/>
+              <Partition DefId="C2">
+                <Condition>
+                  <Expression/>
+                  <ActionSet>
+                    <Action DefId="A0">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A2">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A3">
+                      <Expression/>
+                    </Action>
+                  </ActionSet>
+                </Condition>
+              </Partition>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C1">
+            <Condition>
+              <Expression/>
+              <Partition DefId="C2">
+                <Condition>
+                  <Expression/>
+                  <ActionSet>
+                    <Action DefId="A0">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A2">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A3">
+                      <Expression/>
+                    </Action>
+                  </ActionSet>
+                </Condition>
+              </Partition>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C1">
+            <Condition>
+              <Expression/>
+              <Partition DefId="C2">
+                <Condition>
+                  <Expression/>
+                  <ActionSet>
+                    <Action DefId="A0">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A2">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A3">
+                      <Expression/>
+                    </Action>
+                  </ActionSet>
+                </Condition>
+              </Partition>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C1">
+            <Condition>
+              <Expression/>
+              <Partition DefId="C2">
+                <Condition>
+                  <Expression/>
+                  <ActionSet>
+                    <Action DefId="A0">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A2">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A3">
+                      <Expression/>
+                    </Action>
+                  </ActionSet>
+                </Condition>
+              </Partition>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C1">
+            <Condition>
+              <Expression/>
+              <Partition DefId="C2">
+                <Condition>
+                  <Expression/>
+                  <ActionSet>
+                    <Action DefId="A0">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A2">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A3">
+                      <Expression/>
+                    </Action>
+                  </ActionSet>
+                </Condition>
+              </Partition>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C1">
+            <Condition>
+              <Expression/>
+              <Partition DefId="C2">
+                <Condition>
+                  <Expression/>
+                  <ActionSet>
+                    <Action DefId="A0">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A2">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A3">
+                      <Expression/>
+                    </Action>
+                  </ActionSet>
+                </Condition>
+              </Partition>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C1">
+            <Condition>
+              <Expression/>
+              <Partition DefId="C2">
+                <Condition>
+                  <Expression/>
+                  <ActionSet>
+                    <Action DefId="A0">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A2">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A3">
+                      <Expression/>
+                    </Action>
+                  </ActionSet>
+                </Condition>
+              </Partition>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C1">
+            <Condition>
+              <Expression/>
+              <Partition DefId="C2">
+                <Condition>
+                  <Expression/>
+                  <ActionSet>
+                    <Action DefId="A0">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A2">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A3">
+                      <Expression/>
+                    </Action>
+                  </ActionSet>
+                </Condition>
+              </Partition>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <Partition DefId="C1">
+            <Condition>
+              <Expression/>
+              <Partition DefId="C2">
+                <Condition>
+                  <Expression/>
+                  <ActionSet>
+                    <Action DefId="A0">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A2">
+                      <Expression/>
+                    </Action>
+                    <Action DefId="A3">
                       <Expression/>
                     </Action>
                   </ActionSet>
@@ -545,6 +621,7 @@ if
     <ResourceSet Locale="en_US">
       <Data Name="Definitions(C0)#HeaderText"><![CDATA[Age]]></Data>
       <Data Name="Definitions(C1)#HeaderText"><![CDATA[Last name]]></Data>
+      <Data Name="Definitions(A3)#HeaderText"><![CDATA[Useful condition]]></Data>
       <Data Name="Definitions(C2)#HeaderText"><![CDATA[First name]]></Data>
       <Data Name="Definitions(A0)#HeaderText"><![CDATA[Message]]></Data>
       <Data Name="Definitions(A2)#HeaderText"><![CDATA[Useful values]]></Data>

@@ -5,11 +5,11 @@
   <locale>en_US</locale>
   <definition><![CDATA[definitions
 	set 'birthDate' to the birth date of 'the customer' ;
-	
+	set customerName to "John";
 if
-	the age of 'the customer' is more than 18 and the first name of 'the customer' is "John"
+	the age of 'the customer' is more than 18 and the first name of 'the customer' is customerName
 then
 	print "Young Adult" ;
 	print collect useful values;
-]]></definition>
+	print collect conditions ; ]]></definition>
 </ilog.rules.studio.model.brl:ActionRule>

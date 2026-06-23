@@ -38,6 +38,7 @@ import ilog.rules.brl.semantic.IlrBRLSemanticContext;
 import ilog.rules.brl.syntaxtree.IlrNodePathError;
 import ilog.rules.brl.syntaxtree.IlrSyntaxTree;
 import ilog.rules.brl.util.IlrBRLBuilder;
+import ilog.rules.dt.IlrDTRuleElement;
 import ilog.rules.vocabulary.model.IlrCardinality;
 import ilog.rules.vocabulary.model.IlrConcept;
 import ilog.rules.vocabulary.model.IlrRole;
@@ -61,7 +62,7 @@ import ilog.rules.vocabulary.model.helper.IlrVocabularyHelper;
 public class UsefulValuesAction extends IlrBRLSemanticAction {
 
     /**
-     * The default constructor of this semantic aciton.
+     * The default constructor of this semantic action.
      *
      * @param args The arguments given in the vocabulary file. This plugin has no argument so far.
      */
@@ -87,7 +88,7 @@ public class UsefulValuesAction extends IlrBRLSemanticAction {
             // Scan the action part of the rule and identify if there is a 'usefulValues' sentence used.
             usefulValuesActions = collectUsefulValuesActions(getNodeFromPath(syntaxTree, "/rule/actions"), vocabulary);
             if (usefulValuesActions != null && !usefulValuesActions.isEmpty()) {
-                // 'usefulValues' sentence is currenrly used in the action part of the rule,
+                // 'usefulValues' sentence is currently used in the action part of the rule,
                 // we need to collect the path expressions used in the bindings and conditions
                 String ruleText = getRuleText(syntaxTree);
                 usefulValues = new ArrayList<>();
@@ -106,9 +107,14 @@ public class UsefulValuesAction extends IlrBRLSemanticAction {
                 case IlrBAL.SIMPLE_RULE_AXIOM:
                     // Decision table precondition
                     usefulValues = new ArrayList<>();
-                    collectUsefulValues(dtContext.getDefinition(), getNodeFromPath(syntaxTree, "/simple-rule/bindings"), vocabulary, usefulValues);
-                    collectUsefulValues(dtContext.getDefinition(), getNodeFromPath(syntaxTree, "/simple-rule/conditions"), vocabulary, usefulValues);
-                    usefulValuesStack.pushPreconditions(usefulValues);
+                    String preconditionText = dtContext.getDefinition();
+                    collectUsefulValues(preconditionText, getNodeFromPath(syntaxTree, "/simple-rule/bindings"), vocabulary, usefulValues);
+                    IlrSyntaxTree.Node conditionsNode = getNodeFromPath(syntaxTree, "/simple-rule/conditions");
+                    if (conditionsNode != null) {
+                    	collectUsefulValues(preconditionText, conditionsNode, vocabulary, usefulValues);
+                    	String conditionsText = preconditionText.substring(conditionsNode.getOffset(), conditionsNode.getOffset() + conditionsNode.getLength());
+                    	usefulValuesStack.pushPreconditions(conditionsText, usefulValues);
+                    }
                     break;
                 case IlrBAL.PREDICATE_OR_ACTION_AXIOM:
                     // Decision table action or condition
@@ -117,8 +123,9 @@ public class UsefulValuesAction extends IlrBRLSemanticAction {
                         usefulValues = usefulValuesStack.getUsefulValues();
                         usefulValuesStack.fillMissingConditionsBeforeActions();
                     } else {
-                        usefulValues = collectUsefulValues(dtContext.getDefinition(), getNodeFromPath(syntaxTree, "/predicate-or-action/condition"), vocabulary);
-                        usefulValuesStack.pushCondition(dtContext.getRow(), dtContext.getColumn(), usefulValues);
+                    	String conditionText = dtContext.getDefinition();
+                        usefulValues = collectUsefulValues(conditionText, getNodeFromPath(syntaxTree, "/predicate-or-action/condition"), vocabulary);
+                        usefulValuesStack.pushCondition(dtContext.getRow(), dtContext.getColumn(), conditionText, usefulValues);
                     }
                     break;
             }
@@ -154,6 +161,28 @@ public class UsefulValuesAction extends IlrBRLSemanticAction {
                         }
                     }
                 }
+            }
+            if (brlElement instanceof IlrDTRuleElement) {
+            	UsefulValuesStack usefulValuesStack = dtContext.getUserData(UsefulValuesStack.class);
+            	
+            	List<String> conditionsTexts = usefulValuesStack.getConditionTexts();
+            	if (!conditionsTexts.isEmpty()) {
+            		var balBuilder = new IlrBALBuilder(semanticContext.getDefinition(), vocabulary);
+            		IlrBALBuilder.Expression usefulConditionsExpr = balBuilder.stringValue("Conditions:\n\t- ");
+            		usefulConditionsExpr = balBuilder.concat(usefulConditionsExpr, balBuilder.stringValue(conditionsTexts.get(0)));
+            		for (int index = 1; index < conditionsTexts.size(); index++) {
+            			usefulConditionsExpr = balBuilder.concat(usefulConditionsExpr, balBuilder.concat(balBuilder.stringValue("\n\t- "), 
+            					balBuilder.stringValue(conditionsTexts.get(index))));
+            		}
+            		IlrSyntaxTree.Node usefulConditionsNode = balBuilder.buildExpression(usefulConditionsExpr).getSuperNode();
+                    // Replace the node in the syntax tree
+                    for (UsefulAction usefulAction : usefulValuesActions) {
+                        if (usefulAction.kind == UsefulAction.Kind.CONDITION) {
+                            usefulAction.node.setProperty("ShadowNode", usefulConditionsNode);
+                        }
+                    }
+            	}
+                
             }
         }
     }
@@ -248,16 +277,27 @@ public class UsefulValuesAction extends IlrBRLSemanticAction {
             while (!queue.isEmpty()) {
                 IlrSyntaxTree.Node node = queue.poll();
                 boolean matched = false;
+                // Collect the nodes that are attribute getters
                 IlrSentence sentence = IlrBRL.getSyntaxNodeSentence(node, vocabulary);
                 if (sentence != null && sentence.getCategory().is(IlrSentenceCategory.GETTER_LITERAL)) {
                     IlrRole role = IlrVocabularyHelper.getSubjectRole(sentence);
                     if (role != null) {
                         IlrConcept concept = vocabulary.getConcept(role);
-                        if (concept != null /* && vocabulary.isValueType(concept) */) {
+                        if (concept != null) {
                             matched = true;
                         }
                     }
+                } else {
+                	// We need to check that the node is under an expression
+                	if (node.getSuperNode().getType().startsWith("T-expression")) {
+	                	IlrBRLDefinition definition = root.getSyntaxTree().getBRLDefinition();
+	                	// Collect the nodes that are variables
+	                	if (Boolean.parseBoolean(definition.getGrammarProperty(node.getGrammarNode(), "variable"))) {
+	                		matched = true;
+	                	}
+                	}
                 }
+                
                 if (matched) {
                     // Warning: some cleaning might be necessary for the text (formatting or escaping...)
                     String valueText = text.substring(node.getOffset(), node.getOffset() + node.getLength());
@@ -341,6 +381,7 @@ public class UsefulValuesAction extends IlrBRLSemanticAction {
     static final class UsefulValuesStack {
 
         private final DtSyntaxTreeTransformerContext dtContext;
+        private final List<String> conditionTexts = new ArrayList<>();
         private final List<UsefulValue> usefulValues = new ArrayList<>();
         private int preconditionsCount = 0;
         private int row;
@@ -349,28 +390,31 @@ public class UsefulValuesAction extends IlrBRLSemanticAction {
             this.dtContext = dtContext;
         }
 
-        void pushPreconditions(List<UsefulValue> usefulValues) {
+        void pushPreconditions(String preconditionText, List<UsefulValue> usefulValues) {
             this.usefulValues.addAll(usefulValues);
-            preconditionsCount = usefulValues.size();
+            conditionTexts.add(preconditionText);
+            preconditionsCount = 1;
         }
 
         private int conditionCount() {
-            return this.usefulValues.size() - preconditionsCount;
+            return conditionTexts.size() - preconditionsCount;
         }
 
         private void pop(int count) {
             for (int i = 0; i < count; i++) {
-                this.usefulValues.remove(this.usefulValues.size() - 1);
+            	conditionTexts.remove(conditionTexts.size() - 1);
+                usefulValues.remove(usefulValues.size() - 1);
             }
         }
 
         private void push(int count) {
             for (int i = 0; i < count; i++) {
-                this.usefulValues.add(null);
+                usefulValues.add(null);
+                conditionTexts.add(null);
             }
         }
 
-        void pushCondition(int row, int column, List<UsefulValue> usefulValues) {
+        void pushCondition(int row, int column, String conditionText, List<UsefulValue> usefulValues) {
             if (row > this.row) {
                 if (conditionCount() > column) {
                     pop(conditionCount() - column);
@@ -381,10 +425,15 @@ public class UsefulValuesAction extends IlrBRLSemanticAction {
                 push(column - conditionCount());
             }
             this.usefulValues.addAll(usefulValues);
+            this.conditionTexts.add(conditionText);
         }
 
         void fillMissingConditionsBeforeActions() {
             push(conditionCount() - dtContext.getDtModel().getConditionDefinitionList().size());
+        }
+        
+        List<String> getConditionTexts() {
+            return conditionTexts.stream().filter(v -> v != null).collect(Collectors.toList());
         }
 
         List<UsefulValue> getUsefulValues() {
