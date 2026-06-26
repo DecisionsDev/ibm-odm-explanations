@@ -44,10 +44,67 @@ The contribution requires ODM 9.5.0.1 or higher.
 
 ## How to install in ODM
 
-https://www.ibm.com/docs/en/odm/9.5.0?topic=in-deploying-plug
+There are two ways to build and install the plugin.
+
+### Option 1 — Maven/Tycho build (produces a p2 update site)
+
+The plugin can be built from source using [Tycho](https://github.com/eclipse-tycho/tycho) (Maven plugin for Eclipse plugins), or used as-is from the pre-built artifact already present in [`distrib/updatesite/target/`](distrib/updatesite/target/).
+
+#### Prerequisites
+
+* JDK 21+
+* Maven 3.9+
+* A local IBM ODM Rule Designer installation (version 9.5.0.1 or higher)
+
+#### Build
+
+Run the following command from the [`distrib/`](distrib/) directory, pointing `odm.home` at your Rule Designer installation:
+
+```bash
+cd distrib
+mvn clean package -Dodm.home=/path/to/your/RuleDesigner
+```
+
+On Windows:
+
+```powershell
+cd distrib
+mvn clean package "-Dodm.home=C:\IBM\ODM9501\RuleDesigner"
+```
+
+This produces a compressed p2 update site archive at:
+
+```
+distrib/updatesite/target/com.ibm.odm.explanation.updatesite-1.0.0.zip
+```
+
+The uncompressed p2 repository (usable directly as a local update site) is also available at:
+
+```
+distrib/updatesite/target/repository/
+```
+
+#### Install via the update site
+
+1. In Rule Designer (Eclipse), open **Help → Install New Software…**
+2. Click **Add…** and then choose one of:
+   - **Archive…** — point to the `.zip` file produced by the build (or the pre-built one in `distrib/updatesite/target/`)
+   - **Local…** — point to the `distrib/updatesite/target/repository/` directory if you built from source
+3. Select the **ODM Explanations** feature and click **Next → Finish**.
+4. Restart Rule Designer when prompted.
+
+### Option 2 — Eclipse PDE build and manual deployment
+
+If you prefer to build and deploy the plugin directly inside Eclipse without Maven:
+
+1. Import the [`com.ibm.rules.sample.explanation.usefulvalues`](com.ibm.rules.sample.explanation.usefulvalues/) project into an Eclipse workspace that has the ODM Rule Designer plugins on its target platform.
+2. Build the plugin JAR using **File → Export… → Plug-in Development → Deployable plug-ins and fragments**. Export the `com.ibm.rules.sample.explanation.usefulvalues` plugin to a local directory.
+3. Follow the IBM ODM documentation to deploy the resulting JAR to your ODM installation:
+
+   https://www.ibm.com/docs/en/odm/9.5.0?topic=in-deploying-plug
 
 # License
-The Dockerfiles and associated scripts found in this project are licensed under the [Apache License 2.0](LICENSE).
+The plugin and sample found in this project are licensed under the [Apache License 2.0](LICENSE).
 
 # Notice
 © Copyright IBM Corporation 2026.

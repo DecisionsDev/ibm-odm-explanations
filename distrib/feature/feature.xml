@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.ibm.rules.sample.explanation.feature"
+      label="ODM Explanation Extension"
+      version="1.0.0">
+
+   <description url="https://github.com/DecisionsDev/ibm-odm-explanations">
+      Operation Decision Manager Explanation Extension
+   </description>
+
+   <copyright url="">
+      © Copyright IBM Corp. 2026
+   </copyright>
+
+   <license url="https://www.apache.org/licenses/LICENSE-2.0.txt">
+      Apache License 2.0
+   </license>
+
+   <plugin
+         id="com.ibm.rules.sample.explanation.usefulvalues"
+         version="0.0.0"/>
+
+</feature>

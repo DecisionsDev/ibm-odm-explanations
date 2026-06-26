@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ibm.rules.sample</groupId>
+    <artifactId>eclipse-plugin-parent</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>ODM Explanations Plugin Parent</name>
+
+    <properties>
+        <tycho.version>4.0.10</tycho.version>
+        <odm.version>9.5.0.1</odm.version>
+        <eclipse.version>2024-12</eclipse.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+    </properties>
+
+    <modules>
+        <module>../com.ibm.rules.sample.explanation.usefulvalues</module>
+        <module>feature</module>
+        <module>updatesite</module>
+    </modules>
+
+    <!-- P2 repositories are now defined in the target platform file (odm-target-platform.target) -->
+    <!-- This avoids downloading dependencies and uses your local ODM installation instead -->
+
+    <build>
+        <plugins>
+            <!-- Maven Resources Plugin - Filter target platform file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>filter-target-platform</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>../odm-target-platform.target</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <delimiters>
+                                <delimiter>@</delimiter>
+                            </delimiters>
+                            <useDefaultDelimiters>false</useDefaultDelimiters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Tycho Maven Plugin -->
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-maven-plugin</artifactId>
+                <version>${tycho.version}</version>
+                <extensions>true</extensions>
+            </plugin>
+
+            <!-- Target Platform Configuration -->
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>target-platform-configuration</artifactId>
+                <version>${tycho.version}</version>
+                <configuration>
+                    <!-- Use target platform file to reference local ODM installation -->
+                    <target>
+                        <file>odm-target-platform.target</file>
+                    </target>
+                    
+                    <pomDependencies>consider</pomDependencies>
+                    <environments>
+                        <environment>
+                            <os>win32</os>
+                            <ws>win32</ws>
+                            <arch>x86_64</arch>
+                        </environment>
+                        <environment>
+                            <os>linux</os>
+                            <ws>gtk</ws>
+                            <arch>x86_64</arch>
+                        </environment>
+                        <environment>
+                            <os>macosx</os>
+                            <ws>cocoa</ws>
+                            <arch>x86_64</arch>
+                        </environment>
+                        <environment>
+                            <os>macosx</os>
+                            <ws>cocoa</ws>
+                            <arch>aarch64</arch>
+                        </environment>
+                    </environments>
+                </configuration>
+            </plugin>
+
+            <!-- Tycho Packaging Plugin - Disable strict version validation -->
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-packaging-plugin</artifactId>
+                <version>${tycho.version}</version>
+                <configuration>
+                    <strictVersions>false</strictVersions>
+                </configuration>
+            </plugin>
+
+            <!-- Tycho Compiler Plugin -->
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-compiler-plugin</artifactId>
+                <version>${tycho.version}</version>
+                <configuration>
+                    <useProjectSettings>false</useProjectSettings>
+                    <!-- Disable access restrictions for internal APIs -->
+                    <compilerArgument>-err:-forbidden</compilerArgument>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>
+
+
